@@ -1,0 +1,26 @@
+services:
+    kali:
+        image: yijiahacking:latest
+        container_name: KaliLinux
+        hostname: ja-errorpro.codes
+        build:
+          context: ./
+          dockerfile: Dockerfile
+        restart: always
+        volumes:
+          - ./data/home:/home
+        environment:
+          - TZ=Asia/Taipei
+          - SHELL=/bin/bash
+          - VNC_PASSWORD=YouSHALLnotPASS
+        networks:
+          - Base
+        ports:
+          - 0.0.0.0:8080:8080
+        cap_add:
+          - NET_ADMIN
+        entrypoint: ["/bin/bash", "/start.sh"]
+          
+networks:
+    Base:
+        name: base
